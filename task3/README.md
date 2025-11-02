@@ -2,7 +2,7 @@
 
 ## Overview
 
-This task explores various **knowledge distillation** techniques to transfer knowledge from a larger teacher model (VGG-16/VGG-19) to a smaller student model (VGG-11) on CIFAR-100. The goal is to improve student performance by learning from teacher predictions rather than training independently.
+This task explores various **knowledge distillation** techniques to transfer knowledge from a larger teacher model (VGG-16/VGG-19) to a smaller student model (VGG-11) on CIFAR-100. The goal is to improve student performance by learning from teacher predictions rather than training independently. Additionally, **Grad-CAM visualizations** are used to compare attention patterns across different distillation methods.
 
 ---
 
@@ -10,6 +10,7 @@ This task explores various **knowledge distillation** techniques to transfer kno
 
 - **`task 3.ipynb`**: Main notebook containing all distillation methods and experiments
 - **`logit matching.ipynb`**: Standalone implementation of Logit Matching (LM) distillation technique
+- **`gradcam.ipynb`**: Grad-CAM visualization tool for comparing teacher and student model interpretability
 
 ---
 
@@ -74,6 +75,26 @@ Complete standalone implementation of logit matching distillation:
 
 ---
 
+## Notebook Structure: gradcam.ipynb
+
+### **Cell 1: Google Drive Setup**
+
+Mounts Google Drive for accessing saved model files.
+
+### **Cell 2: Grad-CAM Visualization Pipeline**
+
+Implements complete Grad-CAM visualization comparing multiple distillation methods:
+
+- Loads teacher (VGG-16) and various student models (SI, LM, Hints, CRD)
+- Applies Grad-CAM to visualize attention patterns for each model
+- Generates side-by-side comparison showing original CIFAR-100 image and heatmaps
+- Color-codes predictions (green for correct, red for incorrect)
+- Saves high-resolution comparison image
+
+**Purpose**: Analyze whether different distillation methods affect student model interpretability and whether students learn similar attention patterns to the teacher.
+
+---
+
 ## Distillation Methods Compared
 
 | Method                       | Type           | Key Technique                                 |
@@ -129,6 +150,7 @@ Investigate whether using a larger teacher (VGG-19) instead of VGG-16 leads to b
 - KL divergence rankings
 - Color robustness performance drops
 - Teacher capacity impact analysis
+- **Grad-CAM comparison images** (`distillation_grad_cam_comparison.png`)
 
 ---
 
@@ -163,6 +185,7 @@ Investigate whether using a larger teacher (VGG-19) instead of VGG-16 leads to b
 - numpy
 - pandas
 - tqdm
+- pytorch-grad-cam (for Grad-CAM visualizations)
 - CIFAR-100 dataset (auto-downloaded)
 
 ## Notes

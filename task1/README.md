@@ -2,11 +2,18 @@
 
 ## Overview
 
-This notebook implements both **unstructured** and **structured pruning** techniques on a VGG-11 model fine-tuned on CIFAR-10. The goal is to reduce model size while maintaining accuracy through systematic pruning and fine-tuning strategies.
+This task implements both **unstructured** and **structured pruning** techniques on a VGG-11 model fine-tuned on CIFAR-10. The goal is to reduce model size while maintaining accuracy through systematic pruning and fine-tuning strategies. Additionally, **Grad-CAM visualizations** are used to interpret and compare model attention across pruned variants.
 
 ---
 
-## Notebook Structure
+## Repository Structure
+
+- **`task1.ipynb`**: Main notebook implementing pruning techniques and experiments
+- **`gradcam.ipynb`**: Grad-CAM visualization tool for comparing model interpretability
+
+---
+
+## Notebook Structure: task1.ipynb
 
 ### **PART 1: UNSTRUCTURED PRUNING**
 
@@ -76,6 +83,26 @@ Recovers accuracy through fine-tuning and saves final optimized model
 
 ---
 
+## Notebook Structure: gradcam.ipynb
+
+### **Cell 1: Google Drive Setup**
+
+Mounts Google Drive for accessing saved model files.
+
+### **Cell 2: Grad-CAM Visualization Pipeline**
+
+Implements complete Grad-CAM visualization comparing three model variants:
+
+- Loads original, unstructured pruned, and structured pruned models
+- Applies Grad-CAM to visualize where each model focuses attention
+- Generates side-by-side comparison showing original image and heatmaps for all models
+- Color-codes predictions (green for correct, red for incorrect)
+- Saves high-resolution comparison image
+
+**Purpose**: Analyze whether pruning affects model interpretability and attention patterns on CIFAR-10 test images.
+
+---
+
 ## Expected Outputs
 
 ### Models Saved
@@ -94,6 +121,7 @@ Recovers accuracy through fine-tuning and saves final optimized model
 - Weight distribution histograms (before/after pruning)
 - Sensitivity analysis line plots (unstructured)
 - Sensitivity heatmap (structured)
+- **Grad-CAM comparison images** (`grad_cam_comparison.png`)
 
 ---
 
@@ -109,6 +137,7 @@ Recovers accuracy through fine-tuning and saves final optimized model
    - Remove entire filters based on L1 norms
    - Fine-tune to recover accuracy
 4. **Comparison**: Compare model sizes and accuracies
+5. **Interpretability Analysis**: Use Grad-CAM to visualize attention patterns across model variants
 
 ---
 
@@ -131,6 +160,7 @@ Recovers accuracy through fine-tuning and saves final optimized model
 - numpy
 - matplotlib
 - tqdm
+- pytorch-grad-cam (for Grad-CAM visualizations)
 - CIFAR-10 dataset (auto-downloaded)
 
 ## Notes
